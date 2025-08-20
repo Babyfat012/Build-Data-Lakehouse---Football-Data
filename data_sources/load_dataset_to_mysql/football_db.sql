@@ -1,0 +1,97 @@
+CREATE DATABASE IF NOT EXISTS football_db;
+USE football_db;
+
+CREATE TABLE competitions (
+    competition_id VARCHAR(64),
+    competition_code VARCHAR(64),
+    name VARCHAR(255),
+    sub_type VARCHAR(255), 
+    type VARCHAR(64),
+    country_id VARCHAR(64),
+    country_name VARCHAR(255),
+    domestic_league_code VARCHAR(64),
+    confederation VARCHAR(64),
+    url VARCHAR(500),
+    is_major_national_league VARCHAR(64),
+    PRIMARY KEY (competition_id)
+);
+
+CREATE TABLE clubs (
+    club_id VARCHAR(64),
+    club_code VARCHAR(64),
+    name VARCHAR(255),
+    domestic_competition_id VARCHAR(64),
+    total_market_value VARCHAR(64),
+    squad_size VARCHAR(64),
+    average_age VARCHAR(64),
+    foreigners_number VARCHAR(64),      
+    foreigners_percentage VARCHAR(64),
+    national_team_players VARCHAR(64),
+    stadium_name VARCHAR(255),
+    stadium_seats VARCHAR(64),
+    net_transfer_record VARCHAR(64),
+    coach_name VARCHAR(255),
+    last_season VARCHAR(64),
+    filename VARCHAR(255),
+    url VARCHAR(500),
+    PRIMARY KEY (club_id),
+    FOREIGN KEY (domestic_competition_id) REFERENCES competitions(competition_id)
+);
+
+CREATE TABLE games (
+    game_id VARCHAR(64),
+    competition_id VARCHAR(64),
+    season VARCHAR(64),
+    round VARCHAR(64),
+    date VARCHAR(64),
+    home_club_id VARCHAR(64),
+    away_club_id VARCHAR(64),
+    home_club_goals VARCHAR(64),
+    away_club_goals VARCHAR(64),
+    home_club_position VARCHAR(64),
+    away_club_position VARCHAR(64),
+    home_club_manager_name VARCHAR(255),
+    away_club_manager_name VARCHAR(255),
+    stadium VARCHAR(255),
+    attendance VARCHAR(64),
+    referee VARCHAR(255),
+    url VARCHAR(500),
+    home_club_formation VARCHAR(255),
+    away_club_formation VARCHAR(255),
+    home_club_name VARCHAR(255),
+    away_club_name VARCHAR(255),
+    aggregate VARCHAR(64),
+    competition_type VARCHAR(255),
+    PRIMARY KEY (game_id),
+    FOREIGN KEY (competition_id) REFERENCES competitions(competition_id),
+    FOREIGN KEY (home_club_id) REFERENCES clubs(club_id),
+    FOREIGN KEY (away_club_id) REFERENCES clubs(club_id)  
+);
+
+CREATE TABLE players (
+    player_id VARCHAR(64),
+    first_name VARCHAR(255),
+    last_name VARCHAR(255),
+    name VARCHAR(255),
+    last_season VARCHAR(64),
+    current_club_id VARCHAR(64),
+    player_code VARCHAR(64),
+    country_of_birth VARCHAR(255),
+    city_of_birth VARCHAR(255),
+    country_of_citizenship VARCHAR(255),
+    date_of_birth VARCHAR(64),
+    sub_position VARCHAR(64),
+    position VARCHAR(64),
+    foot VARCHAR(64),
+    height_in_cm VARCHAR(64),
+    contract_expiration_date VARCHAR(64),
+    agent_name VARCHAR(255),
+    image_url VARCHAR(500),
+    url VARCHAR(500),
+    current_club_domestic_competition_id VARCHAR(64),
+    current_club_name VARCHAR(255),
+    market_value_in_eur VARCHAR(64),
+    highest_market_value_in_eur VARCHAR(64),
+    PRIMARY KEY (player_id),
+    FOREIGN KEY (current_club_id) REFERENCES clubs(club_id)
+)   

@@ -1,0 +1,37 @@
+version: '3.9'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: de_mysql
+    volumes:
+      - mysql_data:/var/lib/mysql # Named volume for MySQL data: Lưu trữ dữ liệu MySQL
+      - ./dataset_mysql:/tmp/database # Bind mount để chứa dữ liệu MySQL
+      - ./data_sources/load_dataset_to_mysql:/tmp/load_dataset_to_mysql # Bind mount để load dữ liệu vào MySQL
+      - ./data_sources/mysql_init:/docker-entrypoint-initdb.d # Thư mục cấp quyền tự động cho user admin
+    ports:
+      - "3307:3306" # Cổng để kết nối database MySQL
+    environment:
+      - MYSQL_DATABASE=football_db # Tên database sẽ được tạo
+      - MYSQL_USER=admin # Tên người dùng admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_ROOT_PASSWORD=admin
+    networks:
+      - data_network
+  
+  etl_app:
+    build: ./etl_app
+    container_name: etl_app
+    depends_on:
+      - mysql
+    volumes:
+      - ./data_sources/csv_files:/app/csv_files
+      - ./data_sources/json_files:/app/json_files
+    networks:
+      - data_network
+networks:
+  data_network:
+    driver: bridge # Sử dụng bridge network để kết nối các container
+    name: data_network
+volumes:
+  mysql_data: {}  

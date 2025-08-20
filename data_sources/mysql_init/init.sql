@@ -1,0 +1,2 @@
+GRANT ALL PRIVILEGES ON football_db.* TO 'admin'@'%';
+FLUSH PRIVILEGES;
