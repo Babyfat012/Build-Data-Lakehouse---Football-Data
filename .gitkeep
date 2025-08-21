@@ -1,0 +1,4 @@
+echo "" > dataset_mysql/.gitkeep
+echo "" > dataset_json_and_csv/.gitkeep
+echo "" > data_sources/csv_files/.gitkeep
+echo "" > data_sources/json_files/.gitkeep
