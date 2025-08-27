@@ -1,0 +1,40 @@
+[2025-08-27T08:48:47.933+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-27T08:48:47.995+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: bronze.load_mysql_to_minio manual__2025-08-27T08:48:45.573087+00:00 [queued]>
+[2025-08-27T08:48:48.014+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: bronze.load_mysql_to_minio manual__2025-08-27T08:48:45.573087+00:00 [queued]>
+[2025-08-27T08:48:48.015+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-08-27T08:48:48.054+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load_mysql_to_minio> on 2025-08-27 08:48:45.573087+00:00
+[2025-08-27T08:48:48.080+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'bronze', 'load_mysql_to_minio', 'manual__2025-08-27T08:48:45.573087+00:00', '--job-id', '36', '--raw', '--subdir', 'DAGS_FOLDER/bronze_dag.py', '--cfg-path', '/tmp/tmp7wd3vyll']
+[2025-08-27T08:48:48.088+0000] {standard_task_runner.py:91} INFO - Job 36: Subtask load_mysql_to_minio
+[2025-08-27T08:48:48.099+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=986) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-08-27T08:48:48.103+0000] {standard_task_runner.py:63} INFO - Started process 993 to run task
+[2025-08-27T08:48:48.190+0000] {task_command.py:426} INFO - Running <TaskInstance: bronze.load_mysql_to_minio manual__2025-08-27T08:48:45.573087+00:00 [running]> on host 6f2e815e882f
+[2025-08-27T08:48:48.371+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='bronze' AIRFLOW_CTX_TASK_ID='load_mysql_to_minio' AIRFLOW_CTX_EXECUTION_DATE='2025-08-27T08:48:45.573087+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-08-27T08:48:45.573087+00:00'
+[2025-08-27T08:48:48.377+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-27T08:48:53.148+0000] {bronze_tasks.py:109} ERROR - MySQL connection error: 2005 (HY000): Unknown MySQL server host 'de_mysql' (-5)
+[2025-08-27T08:48:53.150+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-27T08:48:53.151+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/etl_pipeline/assets/bronze_tasks.py", line 111, in load_mysql_to_minio
+    if conn is not None and conn.is_connected():
+       ^^^^
+UnboundLocalError: cannot access local variable 'conn' where it is not associated with a value
+[2025-08-27T08:48:53.164+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=bronze, task_id=load_mysql_to_minio, run_id=manual__2025-08-27T08:48:45.573087+00:00, execution_date=20250827T084845, start_date=20250827T084847, end_date=20250827T084853
+[2025-08-27T08:48:53.175+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 36 for task load_mysql_to_minio (cannot access local variable 'conn' where it is not associated with a value; 993)
+[2025-08-27T08:48:53.221+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-27T08:48:53.234+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-27T08:48:53.236+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

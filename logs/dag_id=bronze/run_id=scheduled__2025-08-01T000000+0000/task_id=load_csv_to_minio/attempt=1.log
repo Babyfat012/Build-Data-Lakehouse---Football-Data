@@ -1,0 +1,36 @@
+[2025-08-27T08:40:58.556+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-27T08:40:58.602+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: bronze.load_csv_to_minio scheduled__2025-08-01T00:00:00+00:00 [queued]>
+[2025-08-27T08:40:58.612+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: bronze.load_csv_to_minio scheduled__2025-08-01T00:00:00+00:00 [queued]>
+[2025-08-27T08:40:58.614+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-08-27T08:40:58.633+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load_csv_to_minio> on 2025-08-01 00:00:00+00:00
+[2025-08-27T08:40:58.646+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'bronze', 'load_csv_to_minio', 'scheduled__2025-08-01T00:00:00+00:00', '--job-id', '30', '--raw', '--subdir', 'DAGS_FOLDER/bronze_dag.py', '--cfg-path', '/tmp/tmpfab1gxo6']
+[2025-08-27T08:40:58.649+0000] {standard_task_runner.py:91} INFO - Job 30: Subtask load_csv_to_minio
+[2025-08-27T08:40:58.651+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=985) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-08-27T08:40:58.652+0000] {standard_task_runner.py:63} INFO - Started process 997 to run task
+[2025-08-27T08:40:58.723+0000] {task_command.py:426} INFO - Running <TaskInstance: bronze.load_csv_to_minio scheduled__2025-08-01T00:00:00+00:00 [running]> on host ed77b841a85d
+[2025-08-27T08:40:58.816+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='bronze' AIRFLOW_CTX_TASK_ID='load_csv_to_minio' AIRFLOW_CTX_EXECUTION_DATE='2025-08-01T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-08-01T00:00:00+00:00'
+[2025-08-27T08:40:58.818+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-27T08:40:58.819+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-27T08:40:58.821+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: load_csv_to_minio() missing 1 required positional argument: 'bucket'
+[2025-08-27T08:40:58.833+0000] {taskinstance.py:1206} INFO - Marking task as FAILED. dag_id=bronze, task_id=load_csv_to_minio, run_id=scheduled__2025-08-01T00:00:00+00:00, execution_date=20250801T000000, start_date=20250827T084058, end_date=20250827T084058
+[2025-08-27T08:40:58.847+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 30 for task load_csv_to_minio (load_csv_to_minio() missing 1 required positional argument: 'bucket'; 997)
+[2025-08-27T08:40:58.869+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-08-27T08:40:58.891+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-27T08:40:58.894+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

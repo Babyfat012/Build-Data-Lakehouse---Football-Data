@@ -13,3 +13,5 @@ mysql_load:
 
 ----SHOW GLOBAL VARIABLES LIKE 'local_infile';
 ---SET GLOBAL local_infile = 1;
+# mc alias set minio http://minio:9000 minio minio123
+--- docker exec -it mc sh

@@ -1,0 +1,23 @@
+[2025-08-27T10:03:25.142+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-08-27T10:03:25.168+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: bronze.load_mysql_to_minio manual__2025-08-27T10:03:22.306231+00:00 [queued]>
+[2025-08-27T10:03:25.175+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: bronze.load_mysql_to_minio manual__2025-08-27T10:03:22.306231+00:00 [queued]>
+[2025-08-27T10:03:25.176+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 1
+[2025-08-27T10:03:25.187+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load_mysql_to_minio> on 2025-08-27 10:03:22.306231+00:00
+[2025-08-27T10:03:25.196+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'bronze', 'load_mysql_to_minio', 'manual__2025-08-27T10:03:22.306231+00:00', '--job-id', '51', '--raw', '--subdir', 'DAGS_FOLDER/bronze_dag.py', '--cfg-path', '/tmp/tmp9gn7gr6l']
+[2025-08-27T10:03:25.198+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=222) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-08-27T10:03:25.199+0000] {standard_task_runner.py:91} INFO - Job 51: Subtask load_mysql_to_minio
+[2025-08-27T10:03:25.200+0000] {standard_task_runner.py:63} INFO - Started process 227 to run task
+[2025-08-27T10:03:25.243+0000] {task_command.py:426} INFO - Running <TaskInstance: bronze.load_mysql_to_minio manual__2025-08-27T10:03:22.306231+00:00 [running]> on host e9525e38228d
+[2025-08-27T10:03:25.322+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='bronze' AIRFLOW_CTX_TASK_ID='load_mysql_to_minio' AIRFLOW_CTX_EXECUTION_DATE='2025-08-27T10:03:22.306231+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-08-27T10:03:22.306231+00:00'
+[2025-08-27T10:03:25.323+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-08-27T10:03:25.496+0000] {logging_mixin.py:188} WARNING - /opt/***/etl_pipeline/assets/bronze_tasks.py:90 UserWarning: pandas only supports SQLAlchemy connectable (engine/connection) or database string URI or sqlite3 DBAPI2 connection. Other DBAPI2 objects are not tested. Please consider using SQLAlchemy.
+[2025-08-27T10:03:25.551+0000] {bronze_tasks.py:105} INFO - Uploaded competitions to bucket lakehouse/mysql
+[2025-08-27T10:03:25.585+0000] {bronze_tasks.py:105} INFO - Uploaded clubs to bucket lakehouse/mysql
+[2025-08-27T10:03:27.437+0000] {bronze_tasks.py:105} INFO - Uploaded games to bucket lakehouse/mysql
+[2025-08-27T10:03:28.336+0000] {bronze_tasks.py:105} INFO - Uploaded players to bucket lakehouse/mysql
+[2025-08-27T10:03:28.385+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-08-27T10:03:28.387+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-08-27T10:03:28.401+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=bronze, task_id=load_mysql_to_minio, run_id=manual__2025-08-27T10:03:22.306231+00:00, execution_date=20250827T100322, start_date=20250827T100325, end_date=20250827T100328
+[2025-08-27T10:03:28.467+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-08-27T10:03:28.495+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-08-27T10:03:28.500+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
