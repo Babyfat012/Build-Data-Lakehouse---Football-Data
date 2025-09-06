@@ -284,10 +284,47 @@ services:
     networks:
     - data_network
 
+  spark-master:
+    build: 
+      context: ./spark # build image theo Dockerfile trong thư mục spark
+      dockerfile: ./Dockerfile # chỉ định Dockerfile để build image
+    container_name: "spark-master"
+    ports:
+      - "7077:7077" # Spark master port
+      - "8081:8080" # Spark master web UI port --> host 8081 : container 8080
+    expose:
+      - "7077"
+    environment:
+      - SPARK_MODE=master
+      - SPARK_RPC_AUTHENTICATION_ENABLED=no
+      - SPARK_RPC_ENCRYPTION_ENABLED=no
+      - SPARK_LOCAL_STORAGE_ENCRYPTION_ENABLED=no
+      - SPARK_SSL_ENABLED=no
+      - SPARK_USER=spark
+    depends_on:
+      - minio
+    volumes:
+      - ./spark/conf/spark-defaults.conf:/opt/bitnami/spark/conf/spark-defaults.conf
+      - ./silver:/opt/bitnami/spark/silver
+    networks:
+      - data_network
+
+  spark-worker-1:
+    image: docker.io/bitnami/spark:3.3.2
+    container_name: "spark-worker-1"
+    env_file:
+      - .env
+    depends_on:
+      - spark-master
+      - minio
+    networks:
+      - data_network
+
 networks:
   data_network:
     driver: bridge # Sử dụng bridge network để kết nối các container
     name: data_network
+
 volumes:
   mysql_data: {}
   miniodata: {}

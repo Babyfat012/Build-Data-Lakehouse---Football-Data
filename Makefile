@@ -15,3 +15,7 @@ mysql_load:
 ---SET GLOBAL local_infile = 1;
 # mc alias set minio http://minio:9000 minio minio123
 --- docker exec -it mc sh
+-- Liệt kê các container đang chạy
+docker ps
+-- Truy cập vào 1 container 
+docker exec -it [id] bash
